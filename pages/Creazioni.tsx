@@ -21,7 +21,7 @@ const Creazioni: React.FC = () => {
                             title={product.name}
                             description={product.description}
                             imageUrl={product.imageUrl}
-                            price={product.price}
+                            price={product.price.toString()}
                         />
                     ))
                 ) : (
