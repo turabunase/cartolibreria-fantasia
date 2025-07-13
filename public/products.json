@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "Zaino Ergonomico",
+    "description": "Zaino spazioso e confortevole, ideale per la scuola e il tempo libero.",
+    "price": 49.99,
+    "image": "/images/zaino.jpg",
+    "category": "scuola",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "name": "Set di Matite Colorate",
+    "description": "Set professionale di 24 matite colorate per artisti e studenti.",
+    "price": 15.50,
+    "image": "/images/matite.jpg",
+    "category": "cancelleria",
+    "featured": false
+  },
+  {
+    "id": "3",
+    "name": "Quaderno a Righe A4",
+    "description": "Quaderno di alta qualità con copertina rigida, 100 pagine.",
+    "price": 3.20,
+    "image": "/images/quaderno.jpg",
+    "category": "scuola",
+    "featured": false
+  },
+  {
+    "id": "4",
+    "name": "Penna Stilografica",
+    "description": "Elegante penna stilografica con inchiostro nero, perfetta per la scrittura quotidiana.",
+    "price": 25.00,
+    "image": "/images/penna.jpg",
+    "category": "cancelleria",
+    "featured": true
+  },
+  {
+    "id": "5",
+    "name": "Acquerelli Professionali",
+    "description": "Set di 12 colori ad acquerello vibranti e di lunga durata.",
+    "price": 35.75,
+    "image": "/images/acquerelli.jpg",
+    "category": "belle_arti",
+    "featured": false
+  },
+  {
+    "id": "6",
+    "name": "Pennelli per Pittura",
+    "description": "Set di 5 pennelli di diverse dimensioni per pittura acrilica e ad olio.",
+    "price": 12.90,
+    "image": "/images/pennelli.jpg",
+    "category": "belle_arti",
+    "featured": false
+  },
+  {
+    "id": "7",
+    "name": "Agenda 2024",
+    "description": "Agenda settimanale con copertina in pelle, ideale per organizzare gli impegni.",
+    "price": 18.00,
+    "image": "/images/agenda.jpg",
+    "category": "cancelleria",
+    "featured": true
+  },
+  {
+    "id": "8",
+    "name": "Globo Terracqueo",
+    "description": "Globo didattico illuminato, perfetto per lo studio della geografia.",
+    "price": 65.00,
+    "image": "/images/globo.jpg",
+    "category": "oggettistica",
+    "featured": false
+  },
+  {
+    "id": "9",
+    "name": "Scultura in Ceramica",
+    "description": "Pezzo unico di scultura artigianale in ceramica, decorazione per la casa.",
+    "price": 85.00,
+    "image": "/images/scultura.jpg",
+    "category": "creazioni",
+    "featured": true
+  },
+  {
+    "id": "10",
+    "name": "Portapenne da Scrivania",
+    "description": "Elegante portapenne in legno, organizza la tua scrivania con stile.",
+    "price": 9.50,
+    "image": "/images/portapenne.jpg",
+    "category": "oggettistica",
+    "featured": false
+  }
+]

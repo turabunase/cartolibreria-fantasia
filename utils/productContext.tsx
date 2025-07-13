@@ -4,19 +4,20 @@ interface Product {
     id: string;
     name: string;
     description: string;
-    price: string;
-    imageUrl: string;
+    price: number;
+    image: string;
     category: string;
     featured: boolean;
 }
 
 interface ProductContextType {
     products: Product[];
-    addProduct: (product: Omit<Product, 'id'>) => void;
-    updateProduct: (id: string, product: Partial<Product>) => void;
+    addProduct: (product: Omit<Product, 'id' | 'image'> & { image: File | null }) => void;
+    updateProduct: (updatedProduct: Product) => void;
     deleteProduct: (id: string) => void;
     getProductsByCategory: (category: string) => Product[];
     getFeaturedProducts: () => Product[];
+    setProducts: React.Dispatch<React.SetStateAction<Product[]>>; // Aggiungi setProducts
 }
 
 const ProductContext = createContext<ProductContextType | null>(null);
@@ -33,30 +34,48 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        // Qui andrà la logica per caricare i prodotti dal backend
-        const savedProducts = localStorage.getItem('products');
-        if (savedProducts) {
-            setProducts(JSON.parse(savedProducts));
-        }
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch('/products.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data: Product[] = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.error("Could not fetch products: ", error);
+                // Fallback to localStorage if fetching fails or no products.json
+                const savedProducts = localStorage.getItem('products');
+                if (savedProducts) {
+                    setProducts(JSON.parse(savedProducts));
+                } else {
+                    // Initialize with empty array if no products.json and no localStorage data
+                    setProducts([]);
+                }
+            }
+        };
+
+        fetchProducts();
     }, []);
 
     useEffect(() => {
-        // Salva i prodotti nel localStorage quando vengono modificati
+        // Save products to localStorage whenever they change
         localStorage.setItem('products', JSON.stringify(products));
     }, [products]);
 
-    const addProduct = (product: Omit<Product, 'id'>) => {
-        const newProduct = {
+    const addProduct = (product: Omit<Product, 'id' | 'image'> & { image: File | null }) => {
+        const newProduct: Product = {
+            id: Date.now().toString(),
             ...product,
-            id: Date.now().toString()
+            image: product.image ? URL.createObjectURL(product.image) : product.image === null ? '' : product.image.toString() // Gestisci il caso in cui l'immagine sia null
         };
-        setProducts(prev => [...prev, newProduct]);
+        setProducts((prevProducts) => [...prevProducts, newProduct]);
     };
 
-    const updateProduct = (id: string, updatedProduct: Partial<Product>) => {
+    const updateProduct = (updatedProduct: Product) => {
         setProducts(prev =>
             prev.map(product =>
-                product.id === id ? { ...product, ...updatedProduct } : product
+                product.id === updatedProduct.id ? updatedProduct : product
             )
         );
     };
@@ -77,6 +96,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
         <ProductContext.Provider
             value={{
                 products,
+                setProducts, // Aggiungi setProducts al contesto
                 addProduct,
                 updateProduct,
                 deleteProduct,
